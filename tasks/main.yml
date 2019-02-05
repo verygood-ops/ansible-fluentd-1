@@ -10,8 +10,9 @@
   tags:
     - always
 
-- include: preflight.yml
-  when: ansible_virtualization_type != "docker"
+# TODO: get back when we get ansible > 2.5
+# - include: preflight.yml
+#   when: ansible_virtualization_type != "docker"
 
 - include: install.yml
 

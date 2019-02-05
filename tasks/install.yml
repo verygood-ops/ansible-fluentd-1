@@ -16,6 +16,10 @@
         repo: "deb https://packages.treasuredata.com/3/{{ ansible_distribution|lower }}/{{ ansible_distribution_release|lower }}/ {{ ansible_distribution_release|lower }} contrib"
         state: present
         update_cache: true
+
+    - name: install td-agent
+      apt:
+        name: td-agent=3.3.0-1
   when: ansible_pkg_mgr == "apt"
 
 - block:
@@ -34,13 +38,17 @@
         file: td
         gpgcheck: true
         gpgkey: https://packages.treasuredata.com/GPG-KEY-td-agent
+
+
+    - name: install td-agent
+      yum:
+        name: td-agent=3.3.0-1
   when: ansible_pkg_mgr == "yum"
 
-- name: Install fluentd (td-agent) and plugins dependencies
+- name: Install plugins dependencies
   package:
     name: "{{ item }}"
     state: present
   with_items:
-    - td-agent
     - "{{ fluentd_plugins_dependencies }}"
   notify: restart td-agent
