@@ -7,3 +7,6 @@ fluentd_metrics: false
 fluentd_plugins: []
 # - { url: "https://raw.githubusercontent.com/emsearcy/fluent-plugin-gelf/master/lib/fluent/plugin/out_gelf.rb" }
 # - { name: "fluent-plugin-secure-forward", 'version': 0.2.3 }
+
+# cleanup old plugins and configs
+tdagent_do_cleanup_old: yes

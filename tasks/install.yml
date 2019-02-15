@@ -39,6 +39,14 @@
         gpgcheck: true
         gpgkey: https://packages.treasuredata.com/GPG-KEY-td-agent
 
+    - name: cleanup old configs and plugins
+      file:
+        state: absent
+        path: "{{ item }}/"
+      with_items:
+        - /etc/td-agent/conf.d
+        - /etc/td-agent/plugin
+      when: tdagent_do_cleanup_old
 
     - name: install td-agent
       yum:
